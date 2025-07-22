@@ -6,9 +6,28 @@ using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private List<ItemSlot> _inventory = new();
     private int _currentIndex = 0;
-    
+
+    private ItemSlot GetCurrentSlot()
+    {
+        return _inventory[_currentIndex];
+    }
+
     void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -47,11 +66,6 @@ public class Inventory : MonoBehaviour
             old.Unselect();
             current.Select();
         }
-    }
-
-    private ItemSlot GetCurrentSlot()
-    {
-        return _inventory[_currentIndex];
     }
 
     public void OnRightClick(InputValue inputValue)

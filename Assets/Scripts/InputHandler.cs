@@ -31,17 +31,25 @@ public class InputHandler : MonoBehaviour
         Inventory.Instance.UseItem();
     }
 
-    void OnMove()
+    void OnMove(InputValue value)
     {
         if (_isInventoryFocused) return;
+
+        Vector2 movement = value.Get<Vector2>();
+
+        Camera.main.GetComponent<CameraMovement>().MoveCamera(movement);
     }
 
-    void OnLook()
+    void OnLook(InputValue value)
     {
         if (_isInventoryFocused) return;
+
+        Vector2 movement = value.Get<Vector2>();
+
+        Camera.main.GetComponent<CameraMovement>().RotateCamera(movement);
     }
 
-    void OnDrop()
+    void OnDrop(InputValue value)
     {
 
     }

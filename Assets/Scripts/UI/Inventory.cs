@@ -32,9 +32,11 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            _inventory.Add(transform.GetChild(i).GetComponent<ItemSlot>());
+            ItemSlot item = transform.GetChild(i).GetComponent<ItemSlot>();
+            _inventory.Add(item);
+            item.InventoryIndex = i;
         }
-        GetCurrentSlot().Select();
+        GetCurrentSlot().GetItemUI().Select();
     }
 
     public void ChangeSelectedSlot(float direction)
@@ -61,15 +63,36 @@ public class Inventory : MonoBehaviour
 
         if (old != current)
         {
-            old.Unselect();
-            current.Select();
+            old.GetItemUI().Unselect();
+            current.GetItemUI().Select();
         }
     }
 
     public void UseItem()
     {
-        if (GetCurrentSlot().IsEmpty()) return;
+        if (GetCurrentSlot().GetItemUI().IsEmpty()) return;
 
         print("ITEM USED!");
+    }
+
+    public void SwapItems(ItemSlot item1,  ItemSlot item2)
+    {
+        int temp = item1.InventoryIndex;
+
+        _inventory[item1.InventoryIndex] = item2;
+        _inventory[item2.InventoryIndex] = item1;
+        item1.InventoryIndex = item2.InventoryIndex;
+        item2.InventoryIndex = temp;
+
+        if (item1.GetItemUI().IsSelected)
+        {
+            item1.GetItemUI().Unselect();
+            item2.GetItemUI().Select();
+        }
+        else if (item2.GetItemUI().IsSelected)
+        {
+            item2.GetItemUI().Unselect();
+            item1.GetItemUI().Select();
+        }
     }
 }

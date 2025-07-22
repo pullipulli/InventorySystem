@@ -43,4 +43,9 @@ public class ItemSlot : MonoBehaviour
         _isSelected = false;
         _image.color = Color.white;
     }
+
+    public bool IsEmpty()
+    {
+        return _itemData == null || _itemPrefab == null;
+    }
 }

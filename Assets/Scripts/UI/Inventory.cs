@@ -15,6 +15,7 @@ public class Inventory : MonoBehaviour
         {
             _inventory.Add(transform.GetChild(i).GetComponent<ItemSlot>());
         }
+        GetCurrentSlot().Select();
     }
 
     public void OnScrollWheel(InputAction.CallbackContext context)
@@ -23,11 +24,14 @@ public class Inventory : MonoBehaviour
 
         if (scroll == 0) return;
 
-        ItemSlot old = _inventory[Mathf.Abs(_currentIndex)];
+        ItemSlot old = GetCurrentSlot();
 
         if (scroll < 0)
         {
             _currentIndex--;
+
+            if (_currentIndex == -1)
+                _currentIndex = _inventory.Count - 1;
         } 
         else
         {
@@ -36,12 +40,24 @@ public class Inventory : MonoBehaviour
 
         _currentIndex %= _inventory.Count;
 
-        ItemSlot current = _inventory[Mathf.Abs(_currentIndex)];
+        ItemSlot current = GetCurrentSlot();
 
         if (old != current)
         {
             old.Unselect();
             current.Select();
         }
+    }
+
+    private ItemSlot GetCurrentSlot()
+    {
+        return _inventory[_currentIndex];
+    }
+
+    public void OnRightMouseClick(InputAction.CallbackContext context)
+    {
+        if (GetCurrentSlot().IsEmpty()) return;
+
+        print("ITEM USED!");
     }
 }

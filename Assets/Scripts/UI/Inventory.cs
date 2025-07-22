@@ -18,9 +18,9 @@ public class Inventory : MonoBehaviour
         GetCurrentSlot().Select();
     }
 
-    public void OnScrollWheel(InputAction.CallbackContext context)
+    public void OnScrollWheel(InputValue inputValue)
     {
-        float scroll = context.ReadValue<Vector2>().y;
+        float scroll = inputValue.Get<Vector2>().y;
 
         if (scroll == 0) return;
 
@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
         return _inventory[_currentIndex];
     }
 
-    public void OnRightMouseClick(InputAction.CallbackContext context)
+    public void OnRightClick(InputValue inputValue)
     {
         if (GetCurrentSlot().IsEmpty()) return;
 

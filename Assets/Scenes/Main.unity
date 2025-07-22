@@ -567,8 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bcd30d50f70d0940ba56d47a55154aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemData: {fileID: 0}
-  _itemPrefab: {fileID: 0}
+  _itemData: {fileID: 11400000, guid: e27b4a7526168d345a259273558b2819, type: 2}
+  _itemPrefab: {fileID: 8035261360366157198, guid: 214be0e5ebebbd44d92d34e5538031c3, type: 3}
   SlotIndex: 0
 --- !u!114 &1265330291
 MonoBehaviour:
@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:

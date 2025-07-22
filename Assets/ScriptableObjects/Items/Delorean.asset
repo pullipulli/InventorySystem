@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Delorean
   m_EditorClassIdentifier: 
   _itemName: Delorean
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 153e917b077cbad43bb3c3dafd79e365, type: 3}
   _tooltip: When used, will reset the scene as it was at the start of the game.
   _previewPrefab: {fileID: 0}
   _droppedPrefab: {fileID: 0}
-  _stackSize: 1
+  _maxStackSize: 1
+  _droppedRotationSpeed: 20

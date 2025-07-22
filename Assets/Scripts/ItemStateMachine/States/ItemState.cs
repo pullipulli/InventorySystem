@@ -6,7 +6,7 @@ public abstract class ItemState
         _myStateController = controller;
     }
 
-    public abstract void UpdateState();
+    public abstract void UpdateState(float dt);
 
     public abstract void OnExit();
 }

@@ -14,5 +14,5 @@ public class PreviewItemState : ItemState
         throw new System.NotImplementedException();
     }
 
-    public override void UpdateState() {}
+    public override void UpdateState(float dt) {}
 }

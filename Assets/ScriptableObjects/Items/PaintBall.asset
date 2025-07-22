@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PaintBall
   m_EditorClassIdentifier: 
   _itemName: Paint Ball
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 0d159b678d744744e8f721a927397469, type: 3}
   _tooltip: You can simply throw those randomly colored paintballs around
   _previewPrefab: {fileID: 0}
   _droppedPrefab: {fileID: 0}
-  _stackSize: 5
+  _maxStackSize: 64
+  _droppedRotationSpeed: 50

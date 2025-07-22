@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: FlyPotion
   m_EditorClassIdentifier: 
   _itemName: Fly Potion
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 48dedc33f4e07ec4e9dec609d5f7d4dc, type: 3}
   _tooltip: When used, this potion will let you go up for a short period of time!
   _previewPrefab: {fileID: 0}
   _droppedPrefab: {fileID: 0}
-  _stackSize: 1
+  _maxStackSize: 5
+  _droppedRotationSpeed: 90

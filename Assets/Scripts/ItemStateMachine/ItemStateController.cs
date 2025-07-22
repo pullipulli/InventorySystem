@@ -9,7 +9,7 @@ public class ItemStateController : MonoBehaviour
 
     void Update()
     {
-        if (_isStarted) _currentState.UpdateState();
+        if (_isStarted) _currentState.UpdateState(Time.deltaTime);
     }
 
     public void ChangeState(ItemState newState)
@@ -30,6 +30,7 @@ public class ItemStateController : MonoBehaviour
     {
         _currentState = initialState;
         _isStarted = true;
+        _currentState.OnEnter(this);
     }
 }
 

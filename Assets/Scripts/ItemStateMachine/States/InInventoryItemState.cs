@@ -1,6 +1,5 @@
 public class InInventoryItemState : ItemState
 {
-    private float _rotateSpeed = 0;
     public override void OnEnter(ItemStateController controller)
     {
         base.OnEnter(controller);
@@ -11,7 +10,7 @@ public class InInventoryItemState : ItemState
         throw new System.NotImplementedException();
     }
 
-    public override void UpdateState()
+    public override void UpdateState(float dt)
     {
         throw new System.NotImplementedException();
     }

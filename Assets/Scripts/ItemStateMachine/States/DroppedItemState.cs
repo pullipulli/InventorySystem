@@ -1,12 +1,16 @@
+using UnityEngine;
+
 public class DroppedItemState : ItemState
 {
     private float _rotateSpeed = 0;
+    private Item _item;
+
     public override void OnEnter(ItemStateController controller)
     {
         base.OnEnter(controller);
 
-        if (controller.gameObject.TryGetComponent<Item>(out Item item))
-            _rotateSpeed = item.ItemData.DroppedRotationSpeed;
+        if (controller.gameObject.TryGetComponent(out _item))
+            _rotateSpeed = _item.ItemData.DroppedRotationSpeed;
     }
 
     public override void OnExit()
@@ -14,10 +18,9 @@ public class DroppedItemState : ItemState
         OnPickedUp();
     }
 
-    public override void UpdateState()
+    public override void UpdateState(float dt)
     {
-        // continue rotating the object
-        throw new System.NotImplementedException();
+        _item.gameObject.transform.Rotate(Vector3.up, _rotateSpeed * dt);
     }
 
     public void OnPickedUp()

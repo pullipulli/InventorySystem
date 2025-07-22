@@ -1,15 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour
 {
     void OnScrollWheel(InputValue value)
     {
-        Inventory.Instance.OnScrollWheel(value);
+        float scrollValue = value.Get<Vector2>().y;
+
+        Inventory.Instance.ChangeSelectedSlot(scrollValue);
     }
 
-    void OnRightClick(InputValue value) 
+    void OnInteract(InputValue value) 
     {
-        Inventory.Instance.OnRightClick(value);
+        Inventory.Instance.UseItem();
     }
 }

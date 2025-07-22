@@ -37,15 +37,13 @@ public class Inventory : MonoBehaviour
         GetCurrentSlot().Select();
     }
 
-    public void OnScrollWheel(InputValue inputValue)
+    public void ChangeSelectedSlot(float direction)
     {
-        float scroll = inputValue.Get<Vector2>().y;
-
-        if (scroll == 0) return;
+        if (direction == 0) return;
 
         ItemSlot old = GetCurrentSlot();
 
-        if (scroll < 0)
+        if (direction < 0)
         {
             _currentIndex--;
 
@@ -68,7 +66,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void OnRightClick(InputValue inputValue)
+    public void UseItem()
     {
         if (GetCurrentSlot().IsEmpty()) return;
 

@@ -9,8 +9,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private GameObject _previewPrefab;
     [SerializeField] private GameObject _droppedPrefab;
     [SerializeField, Min(0)] private int _maxStackSize;
-    [SerializeField, Min(0)] private float _droppedRotationSpeed;
-    [SerializeField, Min(0.01f)] private float _droppedScale;
+    [SerializeField, Min(0)] private float _droppedRotationSpeed = 0f;
 
     public string ItemName { get => _itemName; }
     public Sprite Icon { get => _icon; }
@@ -19,5 +18,4 @@ public class ItemData : ScriptableObject
     public GameObject Droppped { get => _droppedPrefab; }
     public int MaxStackSize { get => _maxStackSize; }
     public float DroppedRotationSpeed { get => _droppedRotationSpeed; }
-    public float DroppedScale { get => _droppedScale; }
 }

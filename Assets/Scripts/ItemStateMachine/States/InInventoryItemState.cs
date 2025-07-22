@@ -1,18 +1,18 @@
-using UnityEngine;
-
-public class PreviewItemState : ItemState
+public class InInventoryItemState : ItemState
 {
+    private float _rotateSpeed = 0;
     public override void OnEnter(ItemStateController controller)
     {
-        // Show item in the first person view
         base.OnEnter(controller);
     }
 
     public override void OnExit()
     {
-        // hide item in the firt person view
         throw new System.NotImplementedException();
     }
 
-    public override void UpdateState() {}
+    public override void UpdateState()
+    {
+        throw new System.NotImplementedException();
+    }
 }

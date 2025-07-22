@@ -2,23 +2,34 @@ using UnityEngine;
 
 public class ItemStateController : MonoBehaviour
 {
-    ItemState currentState;
+    private ItemState _currentState;
+    private bool _isStarted = false;
+
+    public bool IsStarted { get { return _isStarted; } }
 
     void Update()
     {
-        currentState.UpdateState();
+        if (_isStarted) _currentState.UpdateState();
     }
 
     public void ChangeState(ItemState newState)
     {
-        currentState.OnExit();
-        currentState = newState;
-        currentState.OnEnter(this);
+        _currentState.OnExit();
+        _currentState = newState;
+        _currentState.OnEnter(this);
     }
 
     public void StopStateMachine()
     {
+        _isStarted = false;
+        _currentState.OnExit();
+        _currentState = null;
+    }
 
+    public void StartStateMachine(ItemState initialState)
+    {
+        _currentState = initialState;
+        _isStarted = true;
     }
 }
 

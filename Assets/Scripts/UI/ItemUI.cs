@@ -11,6 +11,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private bool _isSelected = false;
     private Image _image;
     private Color _tempColor = Color.white;
+    private Tooltip _tooltip;
 
     public GameObject ItemPrefab { get { return _itemPrefab; } }
     public ItemData ItemData { get { return _itemData; } }
@@ -31,6 +32,8 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
         _image.sprite = ItemData.Icon;
         _tempColor = _image.color;
+        _tooltip = transform.AddComponent<Tooltip>();
+        _tooltip.TooltipString = ItemData.Tooltip;
     }
 
     public void Select()

@@ -4,15 +4,21 @@ public class PreviewItemState : ItemState
 {
     public override void OnEnter(ItemStateController controller)
     {
-        // Show item in the first person view
         base.OnEnter(controller);
     }
 
     public override void OnExit()
     {
-        // hide item in the firt person view
-        throw new System.NotImplementedException();
+        OnDropItem();
     }
 
-    public override void UpdateState(float dt) {}
+    public override void UpdateState(float dt) 
+    {
+        // hypotetical idle animation or something like that!
+    }
+
+    private void OnDropItem()
+    {
+        // hypotetical drop animation / sound etc..
+    }
 }

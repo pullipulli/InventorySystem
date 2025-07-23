@@ -51,7 +51,7 @@ public class InputHandler : MonoBehaviour
 
     void OnDrop(InputValue value)
     {
-
+        // TODO: change state of the selected item to dropped
     }
 
     void OnInventory()

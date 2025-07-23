@@ -25,10 +25,6 @@ public class DroppedItemState : ItemState
 
     public void OnPickedUp()
     {
-        // pickup the item and then
-        // if it is in the inventory change to InInventoryState
-        // else change to PreviewItemState:
-        _myStateController.ChangeState(new PreviewItemState());
-        throw new System.NotImplementedException();
+        // hypotetical pick up sound and animation...
     }
 }

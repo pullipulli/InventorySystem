@@ -25,5 +25,17 @@ public abstract class Item : MonoBehaviour
         else _stateController.StartStateMachine(new PreviewItemState());
     }
 
+    public virtual void DropItem()
+    {
+        if (_stateController == null) return;
+
+        transform.SetParent(null);
+        transform.position += new Vector3(0, 0, 10);    
+        // technically it should be better to have a smooth animation instead as a fixed spawn position
+        // or maybe using physics with a rigidbody..
+
+        _stateController.ChangeState(new DroppedItemState());
+    }
+
     public abstract void UseItem();
 }

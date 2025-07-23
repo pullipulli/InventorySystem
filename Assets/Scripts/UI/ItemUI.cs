@@ -17,15 +17,24 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     public GameObject ItemPrefab { get { return _itemPrefab; } }
     public ItemData ItemData { get { return _itemData; } }
     public bool IsSelected { get  { return _isSelected; } }
+    public GameObject Preview {  get { return _itemPreviewInstance; } }
 
     public void SetItem(Item item)
     {
-        if (_itemPreviewInstance == null) Destroy(_itemPreviewInstance);
+        if (_itemPreviewInstance != null) Destroy(_itemPreviewInstance);
 
         _itemPrefab = item.gameObject;
         _itemData = item.ItemData;
 
         CreateItemPreview();
+    }
+
+    public void RemoveItem()
+    {
+        _itemPrefab = null;
+        _itemData = null;
+        _itemPreviewInstance = null;
+        _image.sprite = null;
     }
 
     private void CreateItemPreview()

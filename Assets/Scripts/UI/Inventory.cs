@@ -72,9 +72,7 @@ public class Inventory : MonoBehaviour
     {
         if (GetCurrentSlot().GetItemUI().IsEmpty()) return;
 
-        GameObject prefabItem = GetCurrentSlot().GetItemUI().ItemPrefab;
-        GameObject instance = Instantiate(prefabItem);
-        instance.GetComponent<Item>().UseItem();
+        GetCurrentSlot().GetItemUI().Preview.GetComponent<Item>().UseItem();
     }
 
     public void SwapItems(ItemSlot item1,  ItemSlot item2)
@@ -96,5 +94,15 @@ public class Inventory : MonoBehaviour
             item2.GetItemUI().Unselect();
             item1.GetItemUI().Select();
         }
+    }
+
+    public void DropSelectedItem()
+    {
+        if (GetCurrentSlot().GetItemUI().IsEmpty()) return;
+
+        GameObject itemToDrop = GetCurrentSlot().GetItemUI().Preview;
+
+        itemToDrop.GetComponent<Item>().DropItem();
+        GetCurrentSlot().GetItemUI().RemoveItem();
     }
 }

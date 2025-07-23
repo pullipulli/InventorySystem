@@ -12,6 +12,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private Image _image;
     private Color _tempColor = Color.white;
     private Tooltip _tooltip;
+    private GameObject _itemPreviewInstance;
 
     public GameObject ItemPrefab { get { return _itemPrefab; } }
     public ItemData ItemData { get { return _itemData; } }
@@ -19,8 +20,32 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void SetItem(Item item)
     {
+        if (_itemPreviewInstance == null) Destroy(_itemPreviewInstance);
+
         _itemPrefab = item.gameObject;
         _itemData = item.ItemData;
+
+        CreateItemPreview();
+    }
+
+    private void CreateItemPreview()
+    {
+        _itemPreviewInstance = Instantiate(_itemPrefab);
+
+        if (IsSelected) ShowPreview();
+        else HidePreview();
+    }
+
+    private void ShowPreview()
+    {
+        if (_itemPreviewInstance)
+            _itemPreviewInstance.SetActive(true);
+    }
+
+    private void HidePreview()
+    {
+        if (_itemPreviewInstance)
+            _itemPreviewInstance.SetActive(false);
     }
 
 
@@ -34,13 +59,18 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         _tempColor = _image.color;
         _tooltip = transform.AddComponent<Tooltip>();
         _tooltip.TooltipString = ItemData.Tooltip;
+
+        CreateItemPreview();
     }
+
 
     public void Select()
     {
         _isSelected = true;
         _image.color = new Color(0.5f, 0.5f, 0.5f, _tempColor.a); // gray
         _tempColor = _image.color;
+
+        ShowPreview();
     }
 
     public void Unselect()
@@ -48,6 +78,8 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         _isSelected = false;
         _image.color = new Color(1, 1, 1, _tempColor.a); // white
         _tempColor = _image.color;
+
+        HidePreview();
     }
 
     public bool IsEmpty()

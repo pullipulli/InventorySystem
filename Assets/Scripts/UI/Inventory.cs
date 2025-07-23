@@ -68,11 +68,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UseItem()
+    public void UseSelectedItem()
     {
         if (GetCurrentSlot().GetItemUI().IsEmpty()) return;
 
-        print("ITEM USED!");
+        GameObject prefabItem = GetCurrentSlot().GetItemUI().ItemPrefab;
+        GameObject instance = Instantiate(prefabItem);
+        instance.GetComponent<Item>().UseItem();
     }
 
     public void SwapItems(ItemSlot item1,  ItemSlot item2)

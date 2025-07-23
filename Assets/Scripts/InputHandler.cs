@@ -28,7 +28,7 @@ public class InputHandler : MonoBehaviour
     {
         if (_isInventoryFocused) return;
 
-        Inventory.Instance.UseItem();
+        Inventory.Instance.UseSelectedItem();
     }
 
     void OnMove(InputValue value)

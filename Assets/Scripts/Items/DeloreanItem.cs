@@ -1,8 +1,9 @@
+using UnityEngine.SceneManagement;
+
 public class DeloreanItem : Item
 {
     public override void UseItem()
     {
-        _stateController.StopStateMachine();
-        throw new System.NotImplementedException();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

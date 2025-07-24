@@ -105,4 +105,13 @@ public class Inventory : MonoBehaviour
         itemToDrop.GetComponent<Item>().DropItem();
         GetCurrentSlot().GetItemUI().RemoveItem();
     }
+
+    public void InsertItemInFirstFreeSlot(Item item)
+    {
+        for (int i = 0; i < _inventory.Count; i++)
+        {
+            if (_inventory[i].GetItemUI().IsEmpty())
+                _inventory[i].GetItemUI().SetItem(item);
+        }
+    }
 }

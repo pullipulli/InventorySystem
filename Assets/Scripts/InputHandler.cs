@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour
@@ -16,6 +17,7 @@ public class InputHandler : MonoBehaviour
         else Destroy(this);
     }
 
+    [SerializeField] private GameObject _character;
     private bool _isInventoryFocused = false;
     void OnScrollWheel(InputValue value)
     {
@@ -37,7 +39,7 @@ public class InputHandler : MonoBehaviour
 
         Vector2 movement = value.Get<Vector2>();
 
-        Camera.main.GetComponent<CameraMovement>().MoveCamera(movement);
+        _character.GetComponent<Character>().Move(movement);
     }
 
     void OnLook(InputValue value)

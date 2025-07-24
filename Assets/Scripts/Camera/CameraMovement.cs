@@ -1,21 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Windows;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 3;
     [SerializeField] private float rotateSpeed = 1f;
 
-    float horizontalMovement;
-    float forwardMovement;
+    private float horizontalRotation;
+    private float verticalRotation;
 
-    float horizontalRotation;
-    float verticalRotation;
-
-    public void MoveCamera(Vector2 input)
-    {
-        horizontalMovement = input.x;
-        forwardMovement = input.y;
-    }
+    private float rotationY = 0f;
 
     public void RotateCamera(Vector2 input)
     {
@@ -25,14 +20,11 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (horizontalMovement != 0 || forwardMovement != 0)
-        {
-            transform.position += moveSpeed * new Vector3(horizontalMovement, 0, forwardMovement) * Time.deltaTime;
-        }
+        float rotationX = transform.localEulerAngles.y + horizontalRotation * Time.deltaTime * rotateSpeed;
 
-        if (horizontalRotation != 0 || verticalRotation != 0)
-        {
-            transform.rotation *= Quaternion.Euler(rotateSpeed * Time.deltaTime * new Vector3(verticalRotation, horizontalRotation, 0));
-        }
+        rotationY += verticalRotation * rotateSpeed * Time.deltaTime;
+        rotationY = Mathf.Clamp(rotationY, -90, +90);
+
+        transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
     }
 }

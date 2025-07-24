@@ -26,6 +26,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         _itemPrefab = item.gameObject;
         _itemData = item.ItemData;
 
+        InitializeUI();
         CreateItemPreview();
     }
 
@@ -41,15 +42,18 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     {
         _itemPreviewInstance = Instantiate(_itemPrefab, Inventory.Instance.Character.ItemPreviewSocket.transform);
 
-        _image.sprite = ItemData.Icon;
-        _tempColor = _image.color;
-        _tooltip = transform.AddComponent<Tooltip>();
-        _tooltip.TooltipString = ItemData.Tooltip;
-
         _itemPreviewInstance.GetComponent<ItemStateController>().StartStateMachine(new PreviewItemState());
 
         if (IsSelected) ShowPreview();
         else HidePreview();
+    }
+
+    private void InitializeUI()
+    {
+        _image.sprite = ItemData.Icon;
+        _tempColor = _image.color;
+        _tooltip = transform.AddComponent<Tooltip>();
+        _tooltip.TooltipString = ItemData.Tooltip;
     }
 
     private void ShowPreview()
@@ -70,11 +74,6 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         _image = GetComponent<Image>();
 
         if (_itemData == null) return;
-
-        _image.sprite = ItemData.Icon;
-        _tempColor = _image.color;
-        _tooltip = transform.AddComponent<Tooltip>();
-        _tooltip.TooltipString = ItemData.Tooltip;
 
         CreateItemPreview();
     }

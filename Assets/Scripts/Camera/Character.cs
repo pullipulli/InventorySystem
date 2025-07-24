@@ -30,6 +30,7 @@ public class Character : MonoBehaviour
         forwardMovement = input.y;
     }
 
+    //just a basic FPS character movement
     private void FixedUpdate()
     {
         Vector3 forwardLook = _camera.transform.forward * forwardMovement;

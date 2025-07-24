@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// this approach is really overkill for this project because we have no animations, sounds or any other need to use a state machine
+// but I think that in a real world application, this could be a perfect fit!
 public class ItemStateController : MonoBehaviour
 {
     private ItemState _currentState;

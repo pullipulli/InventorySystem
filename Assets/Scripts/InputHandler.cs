@@ -17,6 +17,8 @@ public class InputHandler : MonoBehaviour
 
     [SerializeField] private GameObject _character;
     private bool _isInventoryFocused = false;
+
+    // mouse scroll wheel
     void OnScrollWheel(InputValue value)
     {
         float scrollValue = value.Get<Vector2>().y;
@@ -24,6 +26,7 @@ public class InputHandler : MonoBehaviour
         Inventory.Instance.ChangeSelectedSlot(scrollValue);
     }
 
+    // right mouse button
     void OnInteract(InputValue value) 
     {
         if (_isInventoryFocused) return;
@@ -31,6 +34,7 @@ public class InputHandler : MonoBehaviour
         Inventory.Instance.UseSelectedItem();
     }
 
+    // WASD keys
     void OnMove(InputValue value)
     {
         if (_isInventoryFocused) return;
@@ -40,6 +44,7 @@ public class InputHandler : MonoBehaviour
         _character.GetComponent<Character>().Move(movement);
     }
 
+    // mouse movement
     void OnLook(InputValue value)
     {
         if (_isInventoryFocused) return;
@@ -49,11 +54,13 @@ public class InputHandler : MonoBehaviour
         Camera.main.GetComponent<CameraMovement>().RotateCamera(movement);
     }
 
+    // Q key
     void OnDrop(InputValue value)
     {
         Inventory.Instance.DropSelectedItem();
     }
 
+    // I key
     void OnInventory()
     {
         if (_isInventoryFocused)

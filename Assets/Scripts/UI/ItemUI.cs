@@ -19,6 +19,19 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     public ItemData ItemData { get { return _itemData; } }
     public bool IsSelected { get  { return _isSelected; } }
     public GameObject Preview {  get { return _itemPreviewInstance; } }
+    private void Awake()
+    {
+        _image = GetComponent<Image>();
+
+        if (_itemData == null)
+        {
+            _isAfterAwake = true;
+            return;
+        }
+
+        CreateItemPreview();
+        _isAfterAwake = true;
+    }
 
     public void SetItem(Item item)
     {
@@ -41,6 +54,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     private void CreateItemPreview()
     {
+        // this check is to ensure that if we pickup an item after the itemUI is created, then we just need to reparent and change state of the item
         if (_isAfterAwake)
         {
             _itemPrefab.transform.SetParent(Inventory.Instance.Character.ItemPreviewSocket.transform, false);
@@ -80,22 +94,6 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         if (_itemPreviewInstance)
             _itemPreviewInstance.SetActive(false);
     }
-
-
-    private void Awake()
-    {
-        _image = GetComponent<Image>();
-
-        if (_itemData == null)
-        {
-            _isAfterAwake = true;
-            return;
-        }
-
-        CreateItemPreview();
-        _isAfterAwake = true;
-    }
-
 
     public void Select()
     {

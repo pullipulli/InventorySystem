@@ -39,6 +39,7 @@ public class Inventory : MonoBehaviour
         GetCurrentSlot().GetItemUI().Select();
     }
 
+    // this method is used to loop the through the slots in the inventory
     public void ChangeSelectedSlot(float direction)
     {
         if (direction == 0) return;
@@ -70,9 +71,10 @@ public class Inventory : MonoBehaviour
 
     public void UseSelectedItem()
     {
-        if (GetCurrentSlot().GetItemUI().IsEmpty()) return;
+        ItemUI itemUI = GetCurrentSlot().GetItemUI();
+        if (itemUI.IsEmpty()) return;
 
-        GetCurrentSlot().GetItemUI().Preview.GetComponent<Item>().UseItem(Character, () => GetCurrentSlot().GetItemUI().RemoveItem() );
+        itemUI.Preview.GetComponent<Item>().UseItem(Character, () => itemUI.RemoveItem() );
     }
 
     public void SwapItems(ItemSlot item1,  ItemSlot item2)
@@ -98,12 +100,13 @@ public class Inventory : MonoBehaviour
 
     public void DropSelectedItem()
     {
-        if (GetCurrentSlot().GetItemUI().IsEmpty()) return;
+        ItemUI itemUI = GetCurrentSlot().GetItemUI();
+        if (itemUI.IsEmpty()) return;
 
-        GameObject itemToDrop = GetCurrentSlot().GetItemUI().Preview;
+        GameObject itemToDrop = itemUI.Preview;
 
         itemToDrop.GetComponent<Item>().DropItem();
-        GetCurrentSlot().GetItemUI().RemoveItem();
+        itemUI.RemoveItem();
     }
 
     public void InsertItemInFirstFreeSlot(Item item)
@@ -116,5 +119,6 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+        print("Inventory is full!");
     }
 }

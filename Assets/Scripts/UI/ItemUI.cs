@@ -13,6 +13,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     private Color _tempColor = Color.white;
     private Tooltip _tooltip;
     private GameObject _itemPreviewInstance;
+    private bool _isAfterAwake = false;
 
     public GameObject ItemPrefab { get { return _itemPrefab; } }
     public ItemData ItemData { get { return _itemData; } }
@@ -40,9 +41,21 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     private void CreateItemPreview()
     {
-        _itemPreviewInstance = Instantiate(_itemPrefab, Inventory.Instance.Character.ItemPreviewSocket.transform);
+        if (_isAfterAwake)
+        {
+            _itemPrefab.transform.SetParent(Inventory.Instance.Character.ItemPreviewSocket.transform, false);
+            _itemPrefab.transform.localPosition = Vector3.zero;
+            _itemPreviewInstance = _itemPrefab;
 
-        _itemPreviewInstance.GetComponent<ItemStateController>().StartStateMachine(new PreviewItemState());
+            _itemPreviewInstance.GetComponent<ItemStateController>().ChangeState(new PreviewItemState());
+            _itemPreviewInstance.transform.rotation = Quaternion.identity;
+        }
+        else
+        {
+            _itemPreviewInstance = Instantiate(_itemPrefab, Inventory.Instance.Character.ItemPreviewSocket.transform);
+
+            _itemPreviewInstance.GetComponent<ItemStateController>().StartStateMachine(new PreviewItemState());
+        }
 
         if (IsSelected) ShowPreview();
         else HidePreview();
@@ -73,9 +86,14 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     {
         _image = GetComponent<Image>();
 
-        if (_itemData == null) return;
+        if (_itemData == null)
+        {
+            _isAfterAwake = true;
+            return;
+        }
 
         CreateItemPreview();
+        _isAfterAwake = true;
     }
 
 
@@ -104,11 +122,13 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (IsEmpty()) return;
         transform.position = eventData.position;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (IsEmpty()) return;
         _tempColor.a = 0.5f;
         _image.color = _tempColor;
 
@@ -116,6 +136,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (IsEmpty()) return;
         _tempColor.a = 1f;
         _image.color = _tempColor;
         GetComponent<RectTransform>().offsetMax = Vector2.zero;

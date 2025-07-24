@@ -114,7 +114,10 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < _inventory.Count; i++)
         {
             if (_inventory[i].GetItemUI().IsEmpty())
+            {
                 _inventory[i].GetItemUI().SetItem(item);
+                return;
+            }
         }
     }
 }

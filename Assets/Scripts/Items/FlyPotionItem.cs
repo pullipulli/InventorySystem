@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class FlyPotionItem : Item
 {
+    [SerializeField] private float _jumpForce = 10f;
     public override void UseItem(Character owner, Action DestroyCallback)
     {
-        owner.GetComponent<Rigidbody>().AddForce(owner.transform.up * 10f, ForceMode.Impulse);
+        owner.GetComponent<Rigidbody>().AddForce(owner.transform.up * _jumpForce, ForceMode.Impulse);
 
         DestroyCallback();
         Destroy(gameObject);

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PreviewItemState : ItemState
 {
     public override void OnEnter(ItemStateController controller)

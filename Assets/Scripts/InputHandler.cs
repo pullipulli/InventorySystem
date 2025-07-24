@@ -1,7 +1,5 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour

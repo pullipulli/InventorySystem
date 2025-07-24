@@ -14,6 +14,12 @@ public class ItemStateController : MonoBehaviour
 
     public void ChangeState(ItemState newState)
     {
+        if (!IsStarted)
+        {
+            Debug.Log("The State Machine is not started!");
+            return;
+        }
+
         _currentState.OnExit();
         _currentState = newState;
         _currentState.OnEnter(this);

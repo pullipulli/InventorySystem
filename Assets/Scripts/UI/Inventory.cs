@@ -20,8 +20,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    [SerializeField] private GameObject character;
     private List<ItemSlot> _inventory = new();
     private int _currentIndex = 0;
+
+    public Character Character { get => character.GetComponent<Character>(); }
 
     private ItemSlot GetCurrentSlot()
     {

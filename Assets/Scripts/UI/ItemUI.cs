@@ -39,9 +39,14 @@ public class ItemUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
 
     private void CreateItemPreview()
     {
-        _itemPreviewInstance = Instantiate(_itemPrefab, Camera.main.GetComponent<Character>().ItemPreviewSocket.transform);
+        _itemPreviewInstance = Instantiate(_itemPrefab, Inventory.Instance.Character.ItemPreviewSocket.transform);
 
-        _itemPreviewInstance.GetComponent<ItemStateController>().ChangeState(new PreviewItemState());
+        _image.sprite = ItemData.Icon;
+        _tempColor = _image.color;
+        _tooltip = transform.AddComponent<Tooltip>();
+        _tooltip.TooltipString = ItemData.Tooltip;
+
+        _itemPreviewInstance.GetComponent<ItemStateController>().StartStateMachine(new PreviewItemState());
 
         if (IsSelected) ShowPreview();
         else HidePreview();

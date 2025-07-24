@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Item : MonoBehaviour
@@ -37,5 +38,5 @@ public abstract class Item : MonoBehaviour
         _stateController.ChangeState(new DroppedItemState());
     }
 
-    public abstract void UseItem();
+    public abstract void UseItem(Character owner, Action DestroyCallback);
 }

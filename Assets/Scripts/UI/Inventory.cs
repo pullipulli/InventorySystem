@@ -75,7 +75,7 @@ public class Inventory : MonoBehaviour
     {
         if (GetCurrentSlot().GetItemUI().IsEmpty()) return;
 
-        GetCurrentSlot().GetItemUI().Preview.GetComponent<Item>().UseItem();
+        GetCurrentSlot().GetItemUI().Preview.GetComponent<Item>().UseItem(Character, () => GetCurrentSlot().GetItemUI().RemoveItem() );
     }
 
     public void SwapItems(ItemSlot item1,  ItemSlot item2)

@@ -1,11 +1,13 @@
 using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DeloreanItem : Item
+public class FlyPotionItem : Item
 {
     public override void UseItem(Character owner, Action DestroyCallback)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        owner.GetComponent<Rigidbody>().AddForce(owner.transform.up * 10f, ForceMode.Impulse);
+
         DestroyCallback();
         Destroy(gameObject);
     }
